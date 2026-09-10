@@ -93,7 +93,7 @@ const Login = () => {
             variant="h4"
             gutterBottom
           >
-            Welcome Back — KoalaTech Portal (9.3C CD Demo)
+            Login 9.3C CD Demo
           </Typography>
 
           <Typography
