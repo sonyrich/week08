@@ -93,7 +93,7 @@ const Login = () => {
             variant="h4"
             gutterBottom
           >
-            KoalaTech University
+            Welcome Back — KoalaTech Portal (9.3C CD Demo)
           </Typography>
 
           <Typography
