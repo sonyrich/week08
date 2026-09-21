@@ -1,14 +1,11 @@
 location            = "australiasoutheast"
-resource_group_name = "koalatech-week08-rg"
 
-# Replace with a unique name for your Azure Container Registry 
-acr_name = "UNIQUE_ACR_NAME"
+# acr_name, storage_account_name, and aks_cluster_name are intentionally
+# NOT set here. They are supplied at runtime via TF_VAR_* environment
+# variables sourced from GitHub Actions repository variables
+# (ACR_NAME, STORAGE_ACCOUNT_NAME, AKS_CLUSTER_NAME), so real Azure
+# resource identifiers never need to be committed to source control.
 
-# Replace with a unique name for your Azure Storage Account
-storage_account_name = "STORAGE_ACCOUNT_NAME"
-
-# Replace with a unique name for your Azure Kubernetes Service cluster
-aks_cluster_name = "AZURE_K8S_CLUSTER_NAME"
 aks_dns_prefix   = "koalatech"
 
 aks_node_count   = 3
