@@ -22,6 +22,7 @@ jobs:
       TF_VAR_resource_group_name: ${{ vars.AKS_RESOURCE_GROUP }}
       TF_VAR_acr_name: ${{ vars.ACR_NAME }}
       TF_VAR_aks_cluster_name: ${{ vars.AKS_CLUSTER_NAME }}
+      TF_VAR_storage_account_name: ${{ vars.STORAGE_ACCOUNT_NAME }}
     steps:
       - uses: actions/checkout@v5
       - uses: hashicorp/setup-terraform@v4.0.1
