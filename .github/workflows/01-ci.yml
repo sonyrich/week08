@@ -199,7 +199,7 @@ jobs:
         uses: docker/scout-action@v1
         with:
           command: cves
-          image: student-service:${{ github.sha }}
+          image: ${{ vars.ACR_LOGIN_SERVER }}/${{ matrix.image }}:${{ github.sha }}
           only-severities: critical,high
           exit-code: false   # set true once remediated to enforce the gate
           write-comment: true
