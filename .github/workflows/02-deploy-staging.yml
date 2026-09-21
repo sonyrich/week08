@@ -149,3 +149,13 @@ jobs:
           kubectl get pods -n staging
           kubectl get services -n staging
           kubectl get pvc -n staging
+
+      - name: Install kube-prometheus-stack
+        run: |
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo update
+          helm upgrade --install monitoring prometheus-community/kube-prometheus-stack \
+          --namespace monitoring --create-namespace \
+          --set grafana.adminPassword=${{ secrets.GRAFANA_ADMIN_PASSWORD }}
+      - name: Verify Prometheus targets
+        run: kubectl get pods -n monitoring
