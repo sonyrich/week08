@@ -32,7 +32,16 @@ jobs:
         uses: azure/login@v3
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - run: terraform init
+      - name: Verify Azure context
+        run: az account show
+      - name: Terraform Init
+        run: |
+          terraform init \
+          -backend-config="resource_group_name=${{ vars.AKS_RESOURCE_GROUP }}" \
+          -backend-config="storage_account_name=${{ vars.STORAGE_ACCOUNT_NAME }}" \
+          -backend-config="container_name=tfstate" \
+          -backend-config="key=week08.terraform.tfstate"
+
       - run: terraform validate
       - run: terraform plan -out=tfplan
       - run: terraform apply -auto-approve tfplan
