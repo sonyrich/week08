@@ -20,7 +20,8 @@ RUN pip install \
 FROM python:3.14.7-alpine
 
 RUN apk update && apk upgrade --no-cache \
-    && apk add --no-cache libpq
+    && apk add --no-cache libpq \
+    && pip install --no-cache-dir --upgrade pip setuptools msgpack
 
 WORKDIR /app
 
