@@ -1,23 +1,36 @@
-FROM python:3.14.7-alpine
+# ---- Build stage ----
+FROM python:3.14.7-alpine AS builder
 
-# Patch OS packages to fix CVE-2026-8376, CVE-2026-5450 and other Debian CVEs
-RUN apk update && apk upgrade \
-    && rm -rf /var/lib/apk/lists/*
-
+RUN apk add --no-cache \
+    gcc \
+    musl-dev \
+    postgresql-dev \
+    libffi-dev
 
 WORKDIR /app
-
 COPY requirements.txt .
-
 RUN pip install \
     --no-cache-dir \
-    --upgrade pip \
+    --upgrade pip setuptools \
     --root-user-action=ignore \
     -r requirements.txt
 
+
+# ---- Runtime stage ----
+FROM python:3.14.7-alpine
+
+RUN apk update && apk upgrade --no-cache \
+    && apk add --no-cache libpq
+
+WORKDIR /app
+
+# Copy installed packages + console scripts (uvicorn, etc.) from builder — no /root traps
+COPY --from=builder /usr/local/lib/python3.14/site-packages /usr/local/lib/python3.14/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
+
 COPY . .
 
-RUN useradd -m appuser \
+RUN adduser -D appuser \
     && chown -R appuser:appuser /app
 
 USER appuser
