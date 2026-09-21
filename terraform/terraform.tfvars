@@ -2,13 +2,13 @@ location            = "australiasoutheast"
 resource_group_name = "koalatech-week08-rg"
 
 # Replace with a unique name for your Azure Container Registry 
-acr_name = "acrsit722sony81p"
+acr_name = "UNIQUE_ACR_NAME"
 
 # Replace with a unique name for your Azure Storage Account
-storage_account_name = "stsit722sony81p"
+storage_account_name = "STORAGE_ACCOUNT_NAME"
 
 # Replace with a unique name for your Azure Kubernetes Service cluster
-aks_cluster_name = "aks-sit722-sony-81p"
+aks_cluster_name = "AZURE_K8S_CLUSTER_NAME"
 aks_dns_prefix   = "koalatech"
 
 aks_node_count   = 3
