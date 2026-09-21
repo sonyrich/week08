@@ -198,6 +198,8 @@ jobs:
       - name: Docker Scout CVE scan
         uses: docker/scout-action@v1
         with:
+          dockerhub-user: ${{ secrets.DOCKERHUB_USERNAME }}
+          dockerhub-password: ${{ secrets.DOCKERHUB_TOKEN }}
           command: cves
           image: ${{ vars.ACR_LOGIN_SERVER }}/${{ matrix.image }}:${{ github.sha }}
           only-severities: critical,high
